@@ -1,0 +1,24 @@
+#Christian Purdy
+#U0728219
+#A2
+
+#Define HaruLib include
+CC = g++
+CFLAGS = -Wall -std=c++11
+LIBHARUINCLUDE = -L'../libharu/src' -I'../libharu/include'
+ENDTAGS = -lhpdfs -lstdc++
+
+spiralPDF : haruPDF.o Spiral.o spiralPDF.cpp
+		$(CC) -o spiralPDF $(CFLAGS) Spiral.o HaruPDF.o spiralPDF.cpp $(LIBHARUINCLUDE) $(ENDTAGS)
+
+HaruPDF.o : haruPDF.cpp
+		$(CC) $(CLFAGS) -c HaruPDF.cpp -L$(LIBHARUINCLUDE) $(ENDTAGS)
+
+Spiral.o : Spiral.cpp
+		$(CC) $(CFLAGS) -c Spiral.cpp
+
+clean:
+	rm *.o *.~
+
+test:
+	./SpiralPDF "Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. Its not a story the Jedi would tell you"
